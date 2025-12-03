@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automated Contact Form Submission - Boombit</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #134252 0%, #1a6a73 100%);
+            color: white;
+            padding: 40px 0;
+            margin-bottom: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        header p {
+            font-size: 18px;
+            opacity: 0.95;
+            max-width: 600px;
+        }
+
+        .boombit-logo {
+            display: inline-block;
+            font-size: 14px;
+            color: #32b8c6;
+            margin-bottom: 20px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        /* Sections */
+        section {
+            background: white;
+            margin-bottom: 30px;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        section h2 {
+            font-size: 26px;
+            margin-bottom: 20px;
+            color: #134252;
+            border-bottom: 3px solid #32b8c6;
+            padding-bottom: 15px;
+        }
+
+        section h3 {
+            font-size: 18px;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            color: #1a6a73;
+        }
+
+        /* UI Mockup Sections */
+        .ui-mockup {
+            background: #f9f9f9;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 30px;
+            margin: 20px 0;
+            font-family: monospace;
+            font-size: 14px;
+        }
+
+        .form-field {
+            margin-bottom: 20px;
+        }
+
+        .form-field label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #134252;
+            font-family: sans-serif;
+        }
+
+        .form-field input,
+        .form-field textarea,
+        .form-field select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: sans-serif;
+            font-size: 14px;
+        }
+
+        .form-field textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #32b8c6;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2a9fa8;
+        }
+
+        .btn-secondary {
+            background: #e0e0e0;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background: #d0d0d0;
+        }
+
+        /* Flow Diagram */
+        .flow {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .flow-step {
+            background: #134252;
+            color: white;
+            padding: 20px;
+            border-radius: 6px;
+            min-width: 150px;
+            text-align: center;
+            font-weight: 500;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .flow-arrow {
+            font-size: 24px;
+            color: #32b8c6;
+            font-weight: bold;
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table th {
+            background: #134252;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        table td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .success-badge {
+            display: inline-block;
+            background: #4caf50;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            margin-right: 5px;
+        }
+
+        .warning-badge {
+            display: inline-block;
+            background: #ff9800;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            margin-right: 5px;
+        }
+
+        /* Feature Grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .feature-card {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 6px;
+            border-left: 4px solid #32b8c6;
+        }
+
+        .feature-card h4 {
+            margin-bottom: 10px;
+            color: #134252;
+        }
+
+        /* Footer */
+        footer {
+            background: #134252;
+            color: white;
+            padding: 30px 0;
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #32b8c6 0%, #1a6a73 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .cta-section h3 {
+            color: white;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .cta-section p {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .cta-section button {
+            background: white;
+            color: #134252;
+            padding: 14px 30px;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .cta-section button:hover {
+            background: #f0f0f0;
+        }
+
+        .note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .note strong {
+            color: #856404;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 24px;
+            }
+
+            section {
+                padding: 20px;
+            }
+
+            .flow {
+                flex-direction: column;
+            }
+
+            .flow-arrow {
+                transform: rotate(90deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="boombit-logo">🚀 BOOMBIT</div>
+            <h1>Automated Contact Form Submission System</h1>
+            <p>Automatically submit contact forms at scale. Intelligent form detection, smart auto-fill, CAPTCHA solving, and anti-blocking built-in.</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Overview -->
+        <section>
+            <h2>How It Works</h2>
+            <p style="font-size: 16px; margin-bottom: 20px;">The system automates the entire process of finding and submitting contact forms across hundreds of websites. Here's the flow:</p>
+            
+            <div class="flow">
+                <div class="flow-step">📤 Upload CSV</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">🌐 Visit URL</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">🔍 Find Form</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">✍️ Auto-Fill</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">✅ Submit</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">📊 Results</div>
+            </div>
+        </section>
+
+        <!-- UI Mockup: Setup Screen -->
+        <section>
+            <h2>Configuration Screen</h2>
+            <p>When you first set up the system, you'll configure these details once:</p>
+            
+            <div class="ui-mockup">
+                <div class="form-field">
+                    <label>📝 Your Business Name</label>
+                    <input type="text" placeholder="e.g., Boombit Agency" value="Boombit Agency">
+                </div>
+
+                <div class="form-field">
+                    <label>📧 Your Email Address</label>
+                    <input type="email" placeholder="e.g., partnerships@boombit.agency" value="partnerships@boombit.agency">
+                </div>
+
+                <div class="form-field">
+                    <label>💬 Your Outreach Message</label>
+                    <textarea placeholder="Hi {{COMPANY_NAME}}, we help agencies scale...">Hi {{COMPANY_NAME}},
+
+We help agencies like yours scale with top Latin American creative and technical talent. Our team handles overflow work, specialized projects, and on-demand scaling.
+
+Would love to chat about how we can support your team.
+
+Best,
+Boombit</textarea>
+                </div>
+
+                <div class="form-field">
+                    <label>📄 Upload Company URLs (CSV)</label>
+                    <input type="file" accept=".csv">
+                    <small style="color: #666; margin-top: 5px; display: block;">Format: Company Name | Website URL</small>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn-primary">▶️ Start Submission Run</button>
+                    <button class="btn-secondary">⚙️ Advanced Settings</button>
+                </div>
+            </div>
+
+            <div class="note">
+                <strong>💡 Note:</strong> You configure these details once. Then just upload different CSV files and run as many times as needed.
+            </div>
+        </section>
+
+        <!-- UI Mockup: Upload Screen -->
+        <section>
+            <h2>Upload & Run Screen</h2>
+            <p>Once configured, your workflow is simple - just upload and run:</p>
+            
+            <div class="ui-mockup">
+                <h3 style="margin-top: 0;">Submission Run #3</h3>
+                
+                <table>
+                    <tr>
+                        <th>Detail</th>
+                        <th>Value</th>
+                    </tr>
+                    <tr>
+                        <td>CSV File</td>
+                        <td>companies_batch_3.csv</td>
+                    </tr>
+                    <tr>
+                        <td>Total URLs</td>
+                        <td>156</td>
+                    </tr>
+                    <tr>
+                        <td>Estimated Time</td>
+                        <td>45-60 minutes</td>
+                    </tr>
+                    <tr>
+                        <td>Status</td>
+                        <td><span class="success-badge">✓ RUNNING</span></td>
+                    </tr>
+                </table>
+
+                <h3 style="margin-top: 30px;">Real-time Progress</h3>
+                <div style="background: #f0f0f0; padding: 15px; border-radius: 4px; margin: 15px 0;">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                        <div style="width: 20px; height: 20px; background: #4caf50; border-radius: 50%; animation: pulse 1s infinite;"></div>
+                        <strong>142 / 156 completed</strong>
+                    </div>
+                    <div style="width: 100%; height: 8px; background: #e0e0e0; border-radius: 4px; overflow: hidden;">
+                        <div style="width: 91%; height: 100%; background: linear-gradient(90deg, #32b8c6, #1a6a73);"></div>
+                    </div>
+                    <small style="color: #666; display: block; margin-top: 10px;">91% - ~8 minutes remaining</small>
+                </div>
+
+                <table>
+                    <tr>
+                        <th>Status</th>
+                        <th>Count</th>
+                    </tr>
+                    <tr>
+                        <td><span class="success-badge">✓ Success</span></td>
+                        <td>128 (82%)</td>
+                    </tr>
+                    <tr>
+                        <td><span class="warning-badge">⚠ CAPTCHA Blocked</span></td>
+                        <td>10 (6%)</td>
+                    </tr>
+                    <tr>
+                        <td><span class="warning-badge">⚠ Form Not Found</span></td>
+                        <td>4 (3%)</td>
+                    </tr>
+                    <tr>
+                        <td><span style="display: inline-block; background: #f44336; color: white; padding: 4px 8px; border-radius: 3px; font-size: 12px;">✗ Error</span></td>
+                        <td>2 (1%)</td>
+                    </tr>
+                </table>
+
+                <div class="button-group" style="margin-top: 20px;">
+                    <button class="btn-primary">📊 View Results</button>
+                    <button class="btn-secondary">⏸ Pause</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- UI Mockup: Results Screen -->
+        <section>
+            <h2>Results Dashboard</h2>
+            <p>After each run, you get a detailed breakdown showing which forms succeeded and which had issues:</p>
+            
+            <div class="ui-mockup">
+                <h3 style="margin-top: 0;">Results Summary - Run #3</h3>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin: 20px 0;">
+                    <div style="background: #e3f2fd; padding: 15px; border-radius: 4px; text-align: center;">
+                        <div style="font-size: 24px; font-weight: bold; color: #1976d2;">156</div>
+                        <div style="color: #555; font-size: 12px;">Total Forms</div>
+                    </div>
+                    <div style="background: #e8f5e9; padding: 15px; border-radius: 4px; text-align: center;">
+                        <div style="font-size: 24px; font-weight: bold; color: #388e3c;">128</div>
+                        <div style="color: #555; font-size: 12px;">Successfully Submitted</div>
+                    </div>
+                    <div style="background: #fff3e0; padding: 15px; border-radius: 4px; text-align: center;">
+                        <div style="font-size: 24px; font-weight: bold; color: #f57c00;">14</div>
+                        <div style="color: #555; font-size: 12px;">Blocked / Issues</div>
+                    </div>
+                    <div style="background: #fce4ec; padding: 15px; border-radius: 4px; text-align: center;">
+                        <div style="font-size: 24px; font-weight: bold; color: #c2185b;">82%</div>
+                        <div style="color: #555; font-size: 12px;">Success Rate</div>
+                    </div>
+                </div>
+
+                <h3>Detailed Results (Exportable as CSV/JSON)</h3>
+                <table style="font-size: 12px;">
+                    <tr>
+                        <th>Company</th>
+                        <th>URL</th>
+                        <th>Status</th>
+                        <th>Form Type</th>
+                        <th>Time</th>
+                    </tr>
+                    <tr>
+                        <td>Acme Corp</td>
+                        <td>acme.com</td>
+                        <td><span class="success-badge">✓ Success</span></td>
+                        <td>Contact Form</td>
+                        <td>2.3s</td>
+                    </tr>
+                    <tr>
+                        <td>ABC Agency</td>
+                        <td>abc.io</td>
+                        <td><span class="success-badge">✓ Success</span></td>
+                        <td>Contact Form</td>
+                        <td>1.8s</td>
+                    </tr>
+                    <tr>
+                        <td>XYZ Solutions</td>
+                        <td>xyz.co.uk</td>
+                        <td><span class="warning-badge">⚠ CAPTCHA</span></td>
+                        <td>Contact Form</td>
+                        <td>18.5s</td>
+                    </tr>
+                    <tr>
+                        <td>Tech Startup</td>
+                        <td>techstartup.com</td>
+                        <td><span class="warning-badge">⚠ Not Found</span></td>
+                        <td>—</td>
+                        <td>3.1s</td>
+                    </tr>
+                </table>
+
+                <div class="button-group" style="margin-top: 20px;">
+                    <button class="btn-primary">⬇️ Export as CSV</button>
+                    <button class="btn-secondary">🔗 Export as JSON</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section>
+            <h2>What's Included</h2>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>🔍 Smart Form Detection</h4>
+                    <p>Automatically finds contact forms on any website, including hidden /contact pages.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>✍️ Auto-Fill Engine</h4>
+                    <p>Intelligently maps your data to form fields, handling text inputs, dropdowns, and more.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>🛡️ CAPTCHA Solving</h4>
+                    <p>Automatically detects and solves reCAPTCHA, hCaptcha, and other CAPTCHA types (90%+ success).</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>🌐 IP Rotation</h4>
+                    <p>Rotates IP addresses and User-Agents to avoid blocking and look human-like.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>⏱️ Human-like Delays</h4>
+                    <p>Adds realistic delays between submissions to prevent detection by anti-bot systems.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>📊 Detailed Logging</h4>
+                    <p>Every submission logged with timestamp, status, form type, and error reasons for analysis.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>📤 CSV Upload</h4>
+                    <p>Simple CSV format. Company Name | Website URL. Run as many times as you need.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h4>⚡ Fast Execution</h4>
+                    <p>Process 100-150 forms in 40-60 minutes. Scale to 500+ with parallel runs.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- What's NOT Included -->
+        <section>
+            <h2>What's NOT Included (Keep It Simple)</h2>
+            <p>We're focused on form submission automation. These features can be added later if needed:</p>
+            
+            <ul style="font-size: 16px;">
+                <li><strong>❌ Response Tracking:</strong> You'll track replies manually or via your CRM</li>
+                <li><strong>❌ Automatic Follow-ups:</strong> Manual follow-up via HubSpot workflows or email</li>
+                <li><strong>❌ Fancy Dashboards:</strong> Results exported as simple CSV/JSON files</li>
+                <li><strong>❌ CRM Integration:</strong> Can add HubSpot sync later</li>
+                <li><strong>❌ AI Message Generation:</strong> You provide the message - we send it as-is</li>
+            </ul>
+
+            <div class="note">
+                <strong>💡 Philosophy:</strong> Start lean, add complexity only when needed. Most clients don't need all the extras - they need forms submitted reliably. Period.
+            </div>
+        </section>
+
+        <!-- Technical -->
+        <section>
+            <h2>Under the Hood</h2>
+            
+            <h3>Technology Stack</h3>
+            <ul>
+                <li><strong>Language:</strong> Node.js / JavaScript</li>
+                <li><strong>Deployment:</strong> Apify Actor (serverless, scalable)</li>
+                <li><strong>Form Automation:</strong> Puppeteer (browser automation)</li>
+                <li><strong>IP Rotation:</strong> Apify Proxy</li>
+                <li><strong>CAPTCHA Solving:</strong> 2Captcha API</li>
+            </ul>
+
+            <h3>Data Flow</h3>
+            <ol>
+                <li>You upload CSV with company URLs</li>
+                <li>System reads each URL sequentially</li>
+                <li>For each URL: visit → detect form → fill → submit → log result</li>
+                <li>All results saved as JSON/CSV</li>
+                <li>Optional: push to HubSpot, Google Sheets, etc. (add-on)</li>
+            </ol>
+
+            <h3>Success Rates (Realistic Expectations)</h3>
+            <table>
+                <tr>
+                    <th>Metric</th>
+                    <th>Success Rate</th>
+                    <th>Notes</th>
+                </tr>
+                <tr>
+                    <td>Form Detection</td>
+                    <td>80-90%</td>
+                    <td>Depends on website design</td>
+                </tr>
+                <tr>
+                    <td>Auto-Fill</td>
+                    <td>95%+</td>
+                    <td>Forms are usually standard</td>
+                </tr>
+                <tr>
+                    <td>Form Submission</td>
+                    <td>90%+</td>
+                    <td>When form is filled correctly</td>
+                </tr>
+                <tr>
+                    <td>CAPTCHA Solving</td>
+                    <td>90%+</td>
+                    <td>Of encountered CAPTCHAs</td>
+                </tr>
+                <tr>
+                    <td>Overall Success</td>
+                    <td>75-85%</td>
+                    <td>Most target lists</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- Pricing & Timeline -->
+        <section>
+            <h2>Pricing & Timeline</h2>
+            
+            <h3>One-Time Build Cost</h3>
+            <table>
+                <tr>
+                    <th>Phase</th>
+                    <th>Days</th>
+                    <th>Cost</th>
+                </tr>
+                <tr>
+                    <td>Design + Architecture</td>
+                    <td>1</td>
+                    <td>—</td>
+                </tr>
+                <tr>
+                    <td>Build Form Detection</td>
+                    <td>2</td>
+                    <td>$300</td>
+                </tr>
+                <tr>
+                    <td>Build Auto-Fill + Submit</td>
+                    <td>2</td>
+                    <td>$300</td>
+                </tr>
+                <tr>
+                    <td>CAPTCHA + IP Rotation</td>
+                    <td>2</td>
+                    <td>$200</td>
+                </tr>
+                <tr>
+                    <td>Testing + Bug Fixes</td>
+                    <td>2</td>
+                    <td>$100</td>
+                </tr>
+                <tr style="background: #e8f5e9; font-weight: bold;">
+                    <td>TOTAL BUILD</td>
+                    <td>8-10 days</td>
+                    <td>$1,200</td>
+                </tr>
+            </table>
+
+            <h3>Monthly Operating Costs</h3>
+            <table>
+                <tr>
+                    <th>Service</th>
+                    <th>Cost</th>
+                    <th>What It Does</th>
+                </tr>
+                <tr>
+                    <td>Apify Proxy</td>
+                    <td>$15-30</td>
+                    <td>IP rotation for 100-150 forms/day</td>
+                </tr>
+                <tr>
+                    <td>2Captcha API</td>
+                    <td>$5-10</td>
+                    <td>Solves CAPTCHAs as encountered</td>
+                </tr>
+                <tr>
+                    <td>Apify Hosting</td>
+                    <td>$10-20</td>
+                    <td>Runs your actor serverlessly</td>
+                </tr>
+                <tr style="background: #e8f5e9; font-weight: bold;">
+                    <td>TOTAL / MONTH</td>
+                    <td>$30-60</td>
+                    <td>Scale to 500+ daily if needed</td>
+                </tr>
+            </table>
+
+            <h3>Timeline</h3>
+            <div style="background: #f0f0f0; padding: 20px; border-radius: 4px; margin: 15px 0;">
+                <strong>Week 1:</strong> You provide name, email, message, 5-10 test URLs → We build<br>
+                <strong>Week 2:</strong> Test on your URLs → Identify any issues → Fix bugs<br>
+                <strong>Day 11:</strong> Deploy to production → You start running campaigns<br>
+            </div>
+        </section>
+
+        <!-- How It's Used -->
+        <section>
+            <h2>Typical Usage Workflow</h2>
+            
+            <h3>Step 1: Setup (One Time)</h3>
+            <ul>
+                <li>Provide your business name, email, and outreach message</li>
+                <li>System is configured and ready</li>
+            </ul>
+
+            <h3>Step 2: Create CSV</h3>
+            <ul>
+                <li>Export company list from Apollo.io, Hunter.io, or your database</li>
+                <li>Format: Company Name | Website URL (two columns)</li>
+                <li>Save as CSV file</li>
+            </ul>
+
+            <h3>Step 3: Upload & Run</h3>
+            <ul>
+                <li>Upload CSV to the system</li>
+                <li>Click "Start Run"</li>
+                <li>Watch real-time progress</li>
+            </ul>
+
+            <h3>Step 4: Review Results</h3>
+            <ul>
+                <li>Check success rate and any issues</li>
+                <li>Export results as CSV/JSON</li>
+                <li>Manually follow up on successful submissions</li>
+            </ul>
+
+            <h3>Step 5: Repeat</h3>
+            <ul>
+                <li>Rinse and repeat with new URL lists</li>
+                <li>Run as many campaigns as you want</li>
+                <li>Pay only the monthly operational cost</li>
+            </ul>
+        </section>
+
+        <!-- CTA -->
+        <div class="cta-section">
+            <h3>Ready to Automate Your Outreach?</h3>
+            <p>Fill out contact forms at scale, automatically. Let's discuss if this is the right fit for your use case.</p>
+            <button onclick="alert('Send us a message: partnerships@boombit.agency')">📧 Get Started</button>
+        </div>
+
+        <!-- FAQ -->
+        <section>
+            <h2>Frequently Asked Questions</h2>
+            
+            <h3>Q: Will I get blocked by websites?</h3>
+            <p><strong>A:</strong> Unlikely. We use IP rotation, human-like delays, and proper User-Agent rotation. Blocking is rare (<1%) with proper configuration.</p>
+
+            <h3>Q: What if CAPTCHA blocks the form?</h3>
+            <p><strong>A:</strong> We automatically solve most CAPTCHAs (90%+ success). If a CAPTCHA can't be solved, we log it and move on. Still a 75-85% overall success rate.</p>
+
+            <h3>Q: Can I customize the message?</h3>
+            <p><strong>A:</strong> Yes. Use {{COMPANY_NAME}} as a placeholder - it auto-replaces with each company's name. No AI - your message goes exactly as you write it.</p>
+
+            <h3>Q: How many forms can I submit per day?</h3>
+            <p><strong>A:</strong> 100-150 comfortably in one run. With parallel runs, you can scale to 500+ per day.</p>
+
+            <h3>Q: Can I integrate with HubSpot?</h3>
+            <p><strong>A:</strong> Yes, but it's an add-on. Core system logs results to CSV/JSON. HubSpot sync can be built later if needed.</p>
+
+            <h3>Q: What if a website changes its form structure?</h3>
+            <p><strong>A:</strong> We'll update the code for free (first 30 days). After that, it's on a per-incident basis.</p>
+
+            <h3>Q: Do I own the code?</h3>
+            <p><strong>A:</strong> Yes. You get the full actor code and can modify it if needed.</p>
+        </section>
+
+    </div>
+
+    <footer>
+        <div class="container">
+            <p style="margin-bottom: 10px;">Automated Contact Form Submission System</p>
+            <p style="opacity: 0.7; font-size: 14px;">Boombit — Scaling Talent. Scaling Technology.</p>
+        </div>
+    </footer>
+
+    <style>
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+    </style>
+</body>
+</html>
