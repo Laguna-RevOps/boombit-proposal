@@ -3,18 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Automated Contact Form Submission - Boombit</title>
+    <title>Contact Form Automation - Boombit Proposal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Suse:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --black-void: #000000;
+            --dark-matter: #242424;
+            --zinc: #4D4D4D;
+            --white: #FFFFFF;
+            --anti-flash: #F2F2F2;
+            --candy-apple-red: #FF0800;
+            --candy: #FF5E59;
+            --pale-red: #FFD0CE;
+            --cloud: #F7F9F2;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #f5f5f5;
-            color: #333;
+            font-family: 'Suse', sans-serif;
+            background: var(--white);
+            color: var(--black-void);
             line-height: 1.6;
         }
 
@@ -26,300 +43,453 @@
 
         /* Header */
         header {
-            background: linear-gradient(135deg, #134252 0%, #1a6a73 100%);
-            color: white;
-            padding: 40px 0;
+            background: var(--black-void);
+            color: var(--white);
+            padding: 60px 0;
+            margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(135deg, var(--black-void) 0%, var(--dark-matter) 100%);
+            z-index: 1;
+        }
+
+        header .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 40px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--white);
+        }
+
+        .logo-mark {
+            width: 50px;
+            height: 50px;
+            background: var(--candy-apple-red);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            font-weight: 800;
+            color: var(--white);
+            font-size: 24px;
         }
 
         header h1 {
-            font-size: 32px;
-            margin-bottom: 10px;
-            font-weight: 600;
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         header p {
             font-size: 18px;
+            max-width: 700px;
+            font-weight: 400;
             opacity: 0.95;
-            max-width: 600px;
-        }
-
-        .boombit-logo {
-            display: inline-block;
-            font-size: 14px;
-            color: #32b8c6;
-            margin-bottom: 20px;
-            font-weight: 600;
-            letter-spacing: 1px;
+            line-height: 1.5;
         }
 
         /* Sections */
         section {
-            background: white;
-            margin-bottom: 30px;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            background: var(--white);
+            margin-bottom: 50px;
+            padding: 60px;
+            border-left: 8px solid var(--candy-apple-red);
         }
 
         section h2 {
-            font-size: 26px;
-            margin-bottom: 20px;
-            color: #134252;
-            border-bottom: 3px solid #32b8c6;
-            padding-bottom: 15px;
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 35px;
+            color: var(--black-void);
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         section h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-top: 40px;
+            margin-bottom: 25px;
+            color: var(--black-void);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        section h4 {
             font-size: 18px;
+            font-weight: 700;
             margin-top: 25px;
             margin-bottom: 15px;
-            color: #1a6a73;
+            color: var(--black-void);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        /* UI Mockup Sections */
-        .ui-mockup {
-            background: #f9f9f9;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 30px;
-            margin: 20px 0;
-            font-family: monospace;
-            font-size: 14px;
+        p {
+            margin-bottom: 18px;
+            color: var(--black-void);
+            font-size: 16px;
+            line-height: 1.7;
+            font-weight: 400;
         }
 
-        .form-field {
-            margin-bottom: 20px;
-        }
-
-        .form-field label {
-            display: block;
-            font-weight: 500;
-            margin-bottom: 8px;
-            color: #134252;
-            font-family: sans-serif;
-        }
-
-        .form-field input,
-        .form-field textarea,
-        .form-field select {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-family: sans-serif;
-            font-size: 14px;
-        }
-
-        .form-field textarea {
-            resize: vertical;
-            min-height: 80px;
-        }
-
-        .button-group {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        button {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 4px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .btn-primary {
-            background: #32b8c6;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: #2a9fa8;
-        }
-
-        .btn-secondary {
-            background: #e0e0e0;
-            color: #333;
-        }
-
-        .btn-secondary:hover {
-            background: #d0d0d0;
-        }
-
-        /* Flow Diagram */
-        .flow {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            margin: 30px 0;
-            flex-wrap: wrap;
-        }
-
-        .flow-step {
-            background: #134252;
-            color: white;
-            padding: 20px;
-            border-radius: 6px;
-            min-width: 150px;
-            text-align: center;
-            font-weight: 500;
-            flex: 1;
-            min-width: 120px;
-        }
-
-        .flow-arrow {
-            font-size: 24px;
-            color: #32b8c6;
-            font-weight: bold;
-        }
-
-        /* Table */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-
-        table th {
-            background: #134252;
-            color: white;
-            padding: 12px;
-            text-align: left;
-            font-weight: 600;
-        }
-
-        table td {
-            padding: 12px;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        table tr:nth-child(even) {
-            background: #f9f9f9;
+        strong {
+            font-weight: 700;
+            color: var(--black-void);
         }
 
         /* Lists */
         ul, ol {
-            margin-left: 20px;
-            margin-bottom: 15px;
+            margin-left: 30px;
+            margin-bottom: 25px;
         }
 
         li {
+            margin-bottom: 12px;
+            color: var(--black-void);
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 35px 0;
+            font-size: 15px;
+        }
+
+        table th {
+            background: var(--black-void);
+            color: var(--white);
+            padding: 18px;
+            text-align: left;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: none;
+        }
+
+        table td {
+            padding: 16px 18px;
+            border-bottom: 1px solid var(--anti-flash);
+        }
+
+        table tr:nth-child(even) {
+            background: var(--cloud);
+        }
+
+        table tr:last-child {
+            background: var(--anti-flash);
+            font-weight: 700;
+        }
+
+        /* Price Box */
+        .price-box {
+            background: var(--candy-apple-red);
+            color: var(--white);
+            padding: 50px;
+            margin: 40px 0;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .price-box h3 {
+            color: var(--white);
+            font-size: 28px;
+            margin: 0 0 20px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .price-box .amount {
+            font-size: 56px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+        }
+
+        .price-box p {
+            color: rgba(255,255,255,0.95);
             margin-bottom: 8px;
+            font-size: 15px;
         }
 
-        .success-badge {
-            display: inline-block;
-            background: #4caf50;
-            color: white;
-            padding: 4px 8px;
-            border-radius: 3px;
-            font-size: 12px;
-            margin-right: 5px;
-        }
-
-        .warning-badge {
-            display: inline-block;
-            background: #ff9800;
-            color: white;
-            padding: 4px 8px;
-            border-radius: 3px;
-            font-size: 12px;
-            margin-right: 5px;
-        }
-
-        /* Feature Grid */
-        .feature-grid {
+        /* Feature List */
+        .feature-list {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: 1fr 1fr;
             gap: 20px;
-            margin: 20px 0;
+            margin: 35px 0;
         }
 
-        .feature-card {
-            background: #f9f9f9;
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
             padding: 20px;
-            border-radius: 6px;
-            border-left: 4px solid #32b8c6;
+            background: var(--anti-flash);
+            border-left: 4px solid var(--candy-apple-red);
         }
 
-        .feature-card h4 {
+        .feature-item .check {
+            color: var(--candy-apple-red);
+            font-weight: 800;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .feature-item p {
+            margin: 0;
+            font-size: 15px;
+        }
+
+        .feature-item strong {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        /* Payment Options */
+        .payment-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .payment-card {
+            background: var(--anti-flash);
+            padding: 40px;
+            border-left: 6px solid var(--candy-apple-red);
+            text-align: center;
+        }
+
+        .payment-card h4 {
+            color: var(--black-void);
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 18px;
+            text-transform: uppercase;
+        }
+
+        .payment-card .payment-amount {
+            font-size: 44px;
+            font-weight: 800;
+            color: var(--candy-apple-red);
+            margin: 20px 0;
+            letter-spacing: -1px;
+        }
+
+        .payment-card p {
             margin-bottom: 10px;
-            color: #134252;
+            font-size: 14px;
+        }
+
+        /* Comparison Grid */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .comparison-card {
+            background: var(--anti-flash);
+            padding: 35px;
+            border-left: 6px solid var(--candy-apple-red);
+        }
+
+        .comparison-card h4 {
+            font-size: 18px;
+            text-transform: uppercase;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .comparison-card .metric {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 18px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .comparison-card .label {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+            color: var(--zinc);
+            flex: 1;
+        }
+
+        .comparison-card .value {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--black-void);
+            text-align: right;
+        }
+
+        /* FAQ */
+        .faq-item {
+            background: var(--anti-flash);
+            padding: 25px;
+            margin: 25px 0;
+            border-left: 4px solid var(--candy-apple-red);
+        }
+
+        .faq-item h4 {
+            color: var(--black-void);
+            margin-top: 0;
+            margin-bottom: 12px;
+            font-size: 16px;
+            text-transform: uppercase;
+        }
+
+        .faq-item p {
+            margin-bottom: 0;
+            color: var(--black-void);
+            font-size: 15px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--candy-apple-red);
+            color: var(--white);
+            padding: 60px;
+            text-align: center;
+            margin: 60px 0;
+            border-radius: 0;
+        }
+
+        .cta-section h3 {
+            color: var(--white);
+            font-size: 36px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-section p {
+            color: rgba(255,255,255,0.95);
+            font-size: 18px;
+            margin-bottom: 25px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--white);
+            color: var(--candy-apple-red);
+            padding: 16px 45px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 700;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .cta-button:hover {
+            background: var(--anti-flash);
+            transform: translateY(-2px);
         }
 
         /* Footer */
         footer {
-            background: #134252;
-            color: white;
-            padding: 30px 0;
+            background: var(--black-void);
+            color: var(--white);
+            padding: 50px 0;
             margin-top: 60px;
             text-align: center;
         }
 
-        .cta-section {
-            background: linear-gradient(135deg, #32b8c6 0%, #1a6a73 100%);
-            color: white;
-            padding: 40px;
-            border-radius: 8px;
-            text-align: center;
-            margin: 40px 0;
+        footer p {
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 8px;
+            font-size: 14px;
         }
 
-        .cta-section h3 {
-            color: white;
-            font-size: 24px;
-            margin-bottom: 15px;
+        footer strong {
+            color: var(--white);
         }
 
-        .cta-section p {
-            font-size: 16px;
-            margin-bottom: 20px;
+        /* Highlight Boxes */
+        .highlight-box {
+            background: var(--cloud);
+            padding: 25px;
+            border-left: 6px solid var(--candy-apple-red);
+            margin: 25px 0;
         }
 
-        .cta-section button {
-            background: white;
-            color: #134252;
-            padding: 14px 30px;
-            font-size: 16px;
+        .highlight-box p {
+            margin-bottom: 0;
             font-weight: 700;
+            color: var(--black-void);
         }
 
-        .cta-section button:hover {
-            background: #f0f0f0;
-        }
-
-        .note {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 4px;
-        }
-
-        .note strong {
-            color: #856404;
-        }
-
+        /* Responsive */
         @media (max-width: 768px) {
             header h1 {
-                font-size: 24px;
+                font-size: 32px;
             }
 
             section {
-                padding: 20px;
+                padding: 35px 20px;
             }
 
-            .flow {
-                flex-direction: column;
+            .feature-list,
+            .payment-options,
+            .comparison-grid {
+                grid-template-columns: 1fr;
             }
 
-            .flow-arrow {
-                transform: rotate(90deg);
+            table {
+                font-size: 13px;
+            }
+
+            table th, table td {
+                padding: 12px;
+            }
+
+            .payment-card .payment-amount {
+                font-size: 36px;
+            }
+
+            header {
+                padding: 40px 0;
+                margin-bottom: 40px;
+            }
+
+            .cta-section {
+                padding: 40px 20px;
             }
         }
     </style>
@@ -327,512 +497,405 @@
 <body>
     <header>
         <div class="container">
-            <div class="boombit-logo">🚀 BOOMBIT</div>
+            <div class="header-top">
+                <div class="logo">Boombit™</div>
+                <div class="logo-mark">⬆</div>
+            </div>
             <h1>Automated Contact Form Submission System</h1>
-            <p>Automatically submit contact forms at scale. Intelligent form detection, smart auto-fill, CAPTCHA solving, and anti-blocking built-in.</p>
+            <p>Scale your outreach to 5,000+ successful contact form submissions per month, with complete data privacy and backend control.</p>
         </div>
     </header>
 
     <div class="container">
         <!-- Overview -->
         <section>
-            <h2>How It Works</h2>
-            <p style="font-size: 16px; margin-bottom: 20px;">The system automates the entire process of finding and submitting contact forms across hundreds of websites. Here's the flow:</p>
-            
-            <div class="flow">
-                <div class="flow-step">📤 Upload CSV</div>
-                <div class="flow-arrow">→</div>
-                <div class="flow-step">🌐 Visit URL</div>
-                <div class="flow-arrow">→</div>
-                <div class="flow-step">🔍 Find Form</div>
-                <div class="flow-arrow">→</div>
-                <div class="flow-step">✍️ Auto-Fill</div>
-                <div class="flow-arrow">→</div>
-                <div class="flow-step">✅ Submit</div>
-                <div class="flow-arrow">→</div>
-                <div class="flow-step">📊 Results</div>
-            </div>
+            <h2>The Solution</h2>
+            <p>Automated contact form submission at scale. Target any URL, our system detects the contact form, intelligently maps your data to form fields based on field type and structure, and submits it—all without manual intervention.</p>
+            <p><strong>Built on proven technology:</strong> Custom-built automation actor (based on industry-leading Apify platform)</p>
+            <p><strong>Purpose:</strong> Give Boombit complete data privacy, backend control, and a white-label solution you own.</p>
         </section>
 
-        <!-- UI Mockup: Setup Screen -->
-        <section>
-            <h2>Configuration Screen</h2>
-            <p>When you first set up the system, you'll configure these details once:</p>
-            
-            <div class="ui-mockup">
-                <div class="form-field">
-                    <label>📝 Your Business Name</label>
-                    <input type="text" placeholder="e.g., Boombit Agency" value="Boombit Agency">
-                </div>
-
-                <div class="form-field">
-                    <label>📧 Your Email Address</label>
-                    <input type="email" placeholder="e.g., partnerships@boombit.agency" value="partnerships@boombit.agency">
-                </div>
-
-                <div class="form-field">
-                    <label>💬 Your Outreach Message</label>
-                    <textarea placeholder="Hi {{COMPANY_NAME}}, we help agencies scale...">Hi {{COMPANY_NAME}},
-
-We help agencies like yours scale with top Latin American creative and technical talent. Our team handles overflow work, specialized projects, and on-demand scaling.
-
-Would love to chat about how we can support your team.
-
-Best,
-Boombit</textarea>
-                </div>
-
-                <div class="form-field">
-                    <label>📄 Upload Company URLs (CSV)</label>
-                    <input type="file" accept=".csv">
-                    <small style="color: #666; margin-top: 5px; display: block;">Format: Company Name | Website URL</small>
-                </div>
-
-                <div class="button-group">
-                    <button class="btn-primary">▶️ Start Submission Run</button>
-                    <button class="btn-secondary">⚙️ Advanced Settings</button>
-                </div>
-            </div>
-
-            <div class="note">
-                <strong>💡 Note:</strong> You configure these details once. Then just upload different CSV files and run as many times as needed.
-            </div>
-        </section>
-
-        <!-- UI Mockup: Upload Screen -->
-        <section>
-            <h2>Upload & Run Screen</h2>
-            <p>Once configured, your workflow is simple - just upload and run:</p>
-            
-            <div class="ui-mockup">
-                <h3 style="margin-top: 0;">Submission Run #3</h3>
-                
-                <table>
-                    <tr>
-                        <th>Detail</th>
-                        <th>Value</th>
-                    </tr>
-                    <tr>
-                        <td>CSV File</td>
-                        <td>companies_batch_3.csv</td>
-                    </tr>
-                    <tr>
-                        <td>Total URLs</td>
-                        <td>156</td>
-                    </tr>
-                    <tr>
-                        <td>Estimated Time</td>
-                        <td>45-60 minutes</td>
-                    </tr>
-                    <tr>
-                        <td>Status</td>
-                        <td><span class="success-badge">✓ RUNNING</span></td>
-                    </tr>
-                </table>
-
-                <h3 style="margin-top: 30px;">Real-time Progress</h3>
-                <div style="background: #f0f0f0; padding: 15px; border-radius: 4px; margin: 15px 0;">
-                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-                        <div style="width: 20px; height: 20px; background: #4caf50; border-radius: 50%; animation: pulse 1s infinite;"></div>
-                        <strong>142 / 156 completed</strong>
-                    </div>
-                    <div style="width: 100%; height: 8px; background: #e0e0e0; border-radius: 4px; overflow: hidden;">
-                        <div style="width: 91%; height: 100%; background: linear-gradient(90deg, #32b8c6, #1a6a73);"></div>
-                    </div>
-                    <small style="color: #666; display: block; margin-top: 10px;">91% - ~8 minutes remaining</small>
-                </div>
-
-                <table>
-                    <tr>
-                        <th>Status</th>
-                        <th>Count</th>
-                    </tr>
-                    <tr>
-                        <td><span class="success-badge">✓ Success</span></td>
-                        <td>128 (82%)</td>
-                    </tr>
-                    <tr>
-                        <td><span class="warning-badge">⚠ CAPTCHA Blocked</span></td>
-                        <td>10 (6%)</td>
-                    </tr>
-                    <tr>
-                        <td><span class="warning-badge">⚠ Form Not Found</span></td>
-                        <td>4 (3%)</td>
-                    </tr>
-                    <tr>
-                        <td><span style="display: inline-block; background: #f44336; color: white; padding: 4px 8px; border-radius: 3px; font-size: 12px;">✗ Error</span></td>
-                        <td>2 (1%)</td>
-                    </tr>
-                </table>
-
-                <div class="button-group" style="margin-top: 20px;">
-                    <button class="btn-primary">📊 View Results</button>
-                    <button class="btn-secondary">⏸ Pause</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- UI Mockup: Results Screen -->
-        <section>
-            <h2>Results Dashboard</h2>
-            <p>After each run, you get a detailed breakdown showing which forms succeeded and which had issues:</p>
-            
-            <div class="ui-mockup">
-                <h3 style="margin-top: 0;">Results Summary - Run #3</h3>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin: 20px 0;">
-                    <div style="background: #e3f2fd; padding: 15px; border-radius: 4px; text-align: center;">
-                        <div style="font-size: 24px; font-weight: bold; color: #1976d2;">156</div>
-                        <div style="color: #555; font-size: 12px;">Total Forms</div>
-                    </div>
-                    <div style="background: #e8f5e9; padding: 15px; border-radius: 4px; text-align: center;">
-                        <div style="font-size: 24px; font-weight: bold; color: #388e3c;">128</div>
-                        <div style="color: #555; font-size: 12px;">Successfully Submitted</div>
-                    </div>
-                    <div style="background: #fff3e0; padding: 15px; border-radius: 4px; text-align: center;">
-                        <div style="font-size: 24px; font-weight: bold; color: #f57c00;">14</div>
-                        <div style="color: #555; font-size: 12px;">Blocked / Issues</div>
-                    </div>
-                    <div style="background: #fce4ec; padding: 15px; border-radius: 4px; text-align: center;">
-                        <div style="font-size: 24px; font-weight: bold; color: #c2185b;">82%</div>
-                        <div style="color: #555; font-size: 12px;">Success Rate</div>
-                    </div>
-                </div>
-
-                <h3>Detailed Results (Exportable as CSV/JSON)</h3>
-                <table style="font-size: 12px;">
-                    <tr>
-                        <th>Company</th>
-                        <th>URL</th>
-                        <th>Status</th>
-                        <th>Form Type</th>
-                        <th>Time</th>
-                    </tr>
-                    <tr>
-                        <td>Acme Corp</td>
-                        <td>acme.com</td>
-                        <td><span class="success-badge">✓ Success</span></td>
-                        <td>Contact Form</td>
-                        <td>2.3s</td>
-                    </tr>
-                    <tr>
-                        <td>ABC Agency</td>
-                        <td>abc.io</td>
-                        <td><span class="success-badge">✓ Success</span></td>
-                        <td>Contact Form</td>
-                        <td>1.8s</td>
-                    </tr>
-                    <tr>
-                        <td>XYZ Solutions</td>
-                        <td>xyz.co.uk</td>
-                        <td><span class="warning-badge">⚠ CAPTCHA</span></td>
-                        <td>Contact Form</td>
-                        <td>18.5s</td>
-                    </tr>
-                    <tr>
-                        <td>Tech Startup</td>
-                        <td>techstartup.com</td>
-                        <td><span class="warning-badge">⚠ Not Found</span></td>
-                        <td>—</td>
-                        <td>3.1s</td>
-                    </tr>
-                </table>
-
-                <div class="button-group" style="margin-top: 20px;">
-                    <button class="btn-primary">⬇️ Export as CSV</button>
-                    <button class="btn-secondary">🔗 Export as JSON</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Features -->
+        <!-- What's Included -->
         <section>
             <h2>What's Included</h2>
             
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <h4>🔍 Smart Form Detection</h4>
-                    <p>Automatically finds contact forms on any website, including hidden /contact pages.</p>
+            <h3>Build Phase (15-20 Business Days)</h3>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <div class="check">✓</div>
+                    <div>
+                        <strong>Adaptive Form Detection Engine</strong>
+                        <p>Analyzes form structure, field types, and automatically adapts submission logic.</p>
+                    </div>
                 </div>
-
-                <div class="feature-card">
-                    <h4>✍️ Auto-Fill Engine</h4>
-                    <p>Intelligently maps your data to form fields, handling text inputs, dropdowns, and more.</p>
+                <div class="feature-item">
+                    <div class="check">✓</div>
+                    <div>
+                        <strong>Intelligent Auto-Fill Logic</strong>
+                        <p>Maps your data to form fields based on field type, name, and context.</p>
+                    </div>
                 </div>
-
-                <div class="feature-card">
-                    <h4>🛡️ CAPTCHA Solving</h4>
-                    <p>Automatically detects and solves reCAPTCHA, hCaptcha, and other CAPTCHA types (90%+ success).</p>
+                <div class="feature-item">
+                    <div class="check">✓</div>
+                    <div>
+                        <strong>Form Submission & Navigation</strong>
+                        <p>Handles multi-step forms, redirects, and complex form interactions.</p>
+                    </div>
                 </div>
-
-                <div class="feature-card">
-                    <h4>🌐 IP Rotation</h4>
-                    <p>Rotates IP addresses and User-Agents to avoid blocking and look human-like.</p>
+                <div class="feature-item">
+                    <div class="check">✓</div>
+                    <div>
+                        <strong>Error Handling & Retry Logic</strong>
+                        <p>Automatic recovery from timeouts, network issues, and submission failures.</p>
+                    </div>
                 </div>
-
-                <div class="feature-card">
-                    <h4>⏱️ Human-like Delays</h4>
-                    <p>Adds realistic delays between submissions to prevent detection by anti-bot systems.</p>
+                <div class="feature-item">
+                    <div class="check">✓</div>
+                    <div>
+                        <strong>CAPTCHA Solving Integration</strong>
+                        <p>Integration with 2Captcha API (90%+ success rate on encountered CAPTCHAs).</p>
+                    </div>
                 </div>
-
-                <div class="feature-card">
-                    <h4>📊 Detailed Logging</h4>
-                    <p>Every submission logged with timestamp, status, form type, and error reasons for analysis.</p>
+                <div class="feature-item">
+                    <div class="check">✓</div>
+                    <div>
+                        <strong>Logging & Results Export</strong>
+                        <p>Full results in CSV/JSON format with status codes, success/failure reasons.</p>
+                    </div>
                 </div>
-
-                <div class="feature-card">
-                    <h4>📤 CSV Upload</h4>
-                    <p>Simple CSV format. Company Name | Website URL. Run as many times as you need.</p>
+                <div class="feature-item">
+                    <div class="check">✓</div>
+                    <div>
+                        <strong>Real-World Testing & QA</strong>
+                        <p>Full testing on your target URLs with comprehensive debugging.</p>
+                    </div>
                 </div>
-
-                <div class="feature-card">
-                    <h4>⚡ Fast Execution</h4>
-                    <p>Process 100-150 forms in 40-60 minutes. Scale to 500+ with parallel runs.</p>
+                <div class="feature-item">
+                    <div class="check">✓</div>
+                    <div>
+                        <strong>Deployment & Handoff</strong>
+                        <p>Deploy to Apify platform with full documentation and code ownership.</p>
+                    </div>
                 </div>
             </div>
+
+            <h3>Monthly Operating Capabilities</h3>
+            <ul>
+                <li>5,000 successful form submissions per month (scalable to 10,000+)</li>
+                <li>Real-time progress tracking & logging</li>
+                <li>Detailed results with status codes & error analysis</li>
+                <li>IP rotation & anti-detection built-in</li>
+                <li>Automatic CAPTCHA solving</li>
+                <li>Data export ready for your CRM</li>
+            </ul>
+        </section>
+
+        <!-- Pricing -->
+        <section>
+            <h2>Pricing</h2>
+
+            <h3>One-Time Build Cost</h3>
+            <div class="price-box">
+                <h3>Custom Development & Deployment</h3>
+                <div class="amount">$1,500–$1,800</div>
+                <p>Full development, testing, QA, and deployment to Apify platform</p>
+                <p>Timeline: 15–20 business days</p>
+            </div>
+
+            <h3>Payment Options</h3>
+            <div class="payment-options">
+                <div class="payment-card">
+                    <h4>Upfront Payment</h4>
+                    <div class="payment-amount">$1,500</div>
+                    <p>Pay in full at project start</p>
+                    <p>Immediate kickoff</p>
+                </div>
+                <div class="payment-card">
+                    <h4>Milestone-Based</h4>
+                    <div class="payment-amount">$900 + $900</div>
+                    <p>$900 deposit at start</p>
+                    <p>$900 on delivery</p>
+                </div>
+            </div>
+
+            <h3>Monthly Operating Cost</h3>
+            <table>
+                <tr>
+                    <th>Service</th>
+                    <th>Monthly Cost</th>
+                    <th>Details</th>
+                </tr>
+                <tr>
+                    <td>Apify Platform Compute</td>
+                    <td>$35–$50</td>
+                    <td>Based on real usage: $0.007–$0.01 per submission</td>
+                </tr>
+                <tr style="background: var(--anti-flash);">
+                    <td><strong>Total Monthly Operating</strong></td>
+                    <td><strong>$35–$50</strong></td>
+                    <td><strong>Scales linearly with volume</strong></td>
+                </tr>
+            </table>
+
+            <div class="highlight-box">
+                <p>Cost per successful submission: $0.007–$0.01 (less than one cent per form)</p>
+            </div>
+        </section>
+
+        <!-- Comparison -->
+        <section>
+            <h2>Automated vs Manual: ROI Breakdown</h2>
+            
+            <table>
+                <tr>
+                    <th>Metric</th>
+                    <th>Automated System</th>
+                    <th>Manual (Current)</th>
+                </tr>
+                <tr>
+                    <td><strong>Successful submissions/month</strong></td>
+                    <td>5,000</td>
+                    <td>3,500</td>
+                </tr>
+                <tr>
+                    <td><strong>Monthly cost</strong></td>
+                    <td>$35–$50</td>
+                    <td>$300 (1 person FTE)</td>
+                </tr>
+                <tr>
+                    <td><strong>Cost per submission</strong></td>
+                    <td>$0.007–$0.01</td>
+                    <td>$0.086</td>
+                </tr>
+                <tr>
+                    <td><strong>Human time required</strong></td>
+                    <td>Upload CSV + monitor</td>
+                    <td>Full-time data entry</td>
+                </tr>
+                <tr>
+                    <td><strong>Scalability</strong></td>
+                    <td>Easy (add URLs, minimal cost increase)</td>
+                    <td>Limited by hours (requires hiring)</td>
+                </tr>
+                <tr>
+                    <td><strong>Data privacy</strong></td>
+                    <td>Yours (owned backend)</td>
+                    <td>Depends on tool/platform</td>
+                </tr>
+                <tr style="background: var(--anti-flash);">
+                    <td><strong>Monthly savings</strong></td>
+                    <td><strong>$250–$265</strong></td>
+                    <td><strong>Baseline cost</strong></td>
+                </tr>
+            </table>
+
+            <h3>Bottom Line Impact</h3>
+            <div class="highlight-box">
+                <p>83–87% cost reduction ($35–$50 vs $300) + 43% more volume (5,000 vs 3,500) + Complete data control + Owned IP = $3,000–$3,180 annual savings with improved outreach at scale.</p>
+            </div>
+        </section>
+
+        <!-- Volume & Performance -->
+        <section>
+            <h2>Performance Targets</h2>
+            <table>
+                <tr>
+                    <th>Metric</th>
+                    <th>Expected Performance</th>
+                </tr>
+                <tr>
+                    <td>Monthly submissions</td>
+                    <td>5,000 successful (scalable to 10,000+)</td>
+                </tr>
+                <tr>
+                    <td>Daily submissions</td>
+                    <td>~165–200 per day</td>
+                </tr>
+                <tr>
+                    <td>Success rate</td>
+                    <td>65–75% (varies by target website complexity)</td>
+                </tr>
+                <tr>
+                    <td>Form detection accuracy</td>
+                    <td>85%+ (most sites have findable contact forms)</td>
+                </tr>
+                <tr>
+                    <td>Auto-fill accuracy</td>
+                    <td>95%+ (standard form fields)</td>
+                </tr>
+                <tr>
+                    <td>Form submission success</td>
+                    <td>85%+ (when correctly filled)</td>
+                </tr>
+                <tr>
+                    <td>CAPTCHA solve rate</td>
+                    <td>90%+ (of encountered CAPTCHAs)</td>
+                </tr>
+                <tr>
+                    <td>Leads generated/month</td>
+                    <td>~6–7 qualified leads (1 lead per ~750 submissions)</td>
+                </tr>
+            </table>
         </section>
 
         <!-- What's NOT Included -->
         <section>
-            <h2>What's NOT Included (Keep It Simple)</h2>
-            <p>We're focused on form submission automation. These features can be added later if needed:</p>
-            
-            <ul style="font-size: 16px;">
-                <li><strong>❌ Response Tracking:</strong> You'll track replies manually or via your CRM</li>
-                <li><strong>❌ Automatic Follow-ups:</strong> Manual follow-up via HubSpot workflows or email</li>
-                <li><strong>❌ Fancy Dashboards:</strong> Results exported as simple CSV/JSON files</li>
-                <li><strong>❌ CRM Integration:</strong> Can add HubSpot sync later</li>
-                <li><strong>❌ AI Message Generation:</strong> You provide the message - we send it as-is</li>
+            <h2>What's NOT Included</h2>
+            <ul>
+                <li>Response tracking (you handle via your CRM)</li>
+                <li>Automatic follow-ups (manual via email/HubSpot)</li>
+                <li>CRM integrations (handles core automation; integrations billed separately)</li>
+                <li>AI message generation (you provide the outreach message)</li>
+                <li>Ongoing support beyond initial 30-day deployment period</li>
             </ul>
-
-            <div class="note">
-                <strong>💡 Philosophy:</strong> Start lean, add complexity only when needed. Most clients don't need all the extras - they need forms submitted reliably. Period.
-            </div>
         </section>
 
-        <!-- Technical -->
+        <!-- Technical Details -->
         <section>
-            <h2>Under the Hood</h2>
+            <h2>Technical Architecture</h2>
             
             <h3>Technology Stack</h3>
             <ul>
-                <li><strong>Language:</strong> Node.js / JavaScript</li>
-                <li><strong>Deployment:</strong> Apify Actor (serverless, scalable)</li>
-                <li><strong>Form Automation:</strong> Puppeteer (browser automation)</li>
-                <li><strong>IP Rotation:</strong> Apify Proxy</li>
-                <li><strong>CAPTCHA Solving:</strong> 2Captcha API</li>
+                <li>Node.js / JavaScript (Apify Actor framework)</li>
+                <li>Puppeteer (browser automation & form interaction)</li>
+                <li>Adaptive form field detection & mapping</li>
+                <li>2Captcha API (CAPTCHA solving)</li>
+                <li>Apify Proxy (IP rotation & anti-detection)</li>
             </ul>
 
-            <h3>Data Flow</h3>
-            <ol>
-                <li>You upload CSV with company URLs</li>
-                <li>System reads each URL sequentially</li>
-                <li>For each URL: visit → detect form → fill → submit → log result</li>
-                <li>All results saved as JSON/CSV</li>
-                <li>Optional: push to HubSpot, Google Sheets, etc. (add-on)</li>
-            </ol>
+            <h3>Deployment & Operations</h3>
+            <ul>
+                <li>Runs on Apify's serverless platform (automatically scales with volume)</li>
+                <li>All results logged to Apify dashboard in real-time</li>
+                <li>Export data to CSV/JSON on demand</li>
+                <li>Full audit trail of submissions, successes, and failures</li>
+            </ul>
 
-            <h3>Success Rates (Realistic Expectations)</h3>
-            <table>
-                <tr>
-                    <th>Metric</th>
-                    <th>Success Rate</th>
-                    <th>Notes</th>
-                </tr>
-                <tr>
-                    <td>Form Detection</td>
-                    <td>80-90%</td>
-                    <td>Depends on website design</td>
-                </tr>
-                <tr>
-                    <td>Auto-Fill</td>
-                    <td>95%+</td>
-                    <td>Forms are usually standard</td>
-                </tr>
-                <tr>
-                    <td>Form Submission</td>
-                    <td>90%+</td>
-                    <td>When form is filled correctly</td>
-                </tr>
-                <tr>
-                    <td>CAPTCHA Solving</td>
-                    <td>90%+</td>
-                    <td>Of encountered CAPTCHAs</td>
-                </tr>
-                <tr>
-                    <td>Overall Success</td>
-                    <td>75-85%</td>
-                    <td>Most target lists</td>
-                </tr>
-            </table>
+            <h3>Data Security & Ownership</h3>
+            <ul>
+                <li>No data shared with third parties</li>
+                <li>Runs on private Apify compute resources</li>
+                <li>Full source code ownership (you can modify or extend)</li>
+                <li>Can be handed to another developer or maintained in-house</li>
+            </ul>
         </section>
 
-        <!-- Pricing & Timeline -->
+        <!-- Timeline -->
         <section>
-            <h2>Pricing & Timeline</h2>
-            
-            <h3>One-Time Build Cost</h3>
+            <h2>Development Timeline</h2>
             <table>
                 <tr>
                     <th>Phase</th>
-                    <th>Days</th>
-                    <th>Cost</th>
+                    <th>Duration</th>
+                    <th>Deliverables</th>
                 </tr>
                 <tr>
-                    <td>Design + Architecture</td>
-                    <td>1</td>
-                    <td>—</td>
+                    <td>Design & Architecture</td>
+                    <td>2 days</td>
+                    <td>Project scope, technical design, API mapping</td>
                 </tr>
                 <tr>
-                    <td>Build Form Detection</td>
-                    <td>2</td>
-                    <td>$300</td>
+                    <td>Core Development</td>
+                    <td>8–10 days</td>
+                    <td>Form detection, auto-fill, submission engine</td>
                 </tr>
                 <tr>
-                    <td>Build Auto-Fill + Submit</td>
-                    <td>2</td>
-                    <td>$300</td>
+                    <td>Integration & Testing</td>
+                    <td>3–4 days</td>
+                    <td>CAPTCHA integration, proxy setup, error handling</td>
                 </tr>
                 <tr>
-                    <td>CAPTCHA + IP Rotation</td>
-                    <td>2</td>
-                    <td>$200</td>
+                    <td>QA & Debugging</td>
+                    <td>2–3 days</td>
+                    <td>Real-world testing, edge case fixes, optimization</td>
                 </tr>
                 <tr>
-                    <td>Testing + Bug Fixes</td>
-                    <td>2</td>
-                    <td>$100</td>
+                    <td>Deployment & Handoff</td>
+                    <td>1 day</td>
+                    <td>Go live on Apify, documentation, training</td>
                 </tr>
-                <tr style="background: #e8f5e9; font-weight: bold;">
-                    <td>TOTAL BUILD</td>
-                    <td>8-10 days</td>
-                    <td>$1,200</td>
+                <tr style="background: var(--anti-flash);">
+                    <td><strong>Total</strong></td>
+                    <td><strong>15–20 business days</strong></td>
+                    <td><strong>Production-ready automation system</strong></td>
                 </tr>
             </table>
-
-            <h3>Monthly Operating Costs</h3>
-            <table>
-                <tr>
-                    <th>Service</th>
-                    <th>Cost</th>
-                    <th>What It Does</th>
-                </tr>
-                <tr>
-                    <td>Apify Proxy</td>
-                    <td>$15-30</td>
-                    <td>IP rotation for 100-150 forms/day</td>
-                </tr>
-                <tr>
-                    <td>2Captcha API</td>
-                    <td>$5-10</td>
-                    <td>Solves CAPTCHAs as encountered</td>
-                </tr>
-                <tr>
-                    <td>Apify Hosting</td>
-                    <td>$10-20</td>
-                    <td>Runs your actor serverlessly</td>
-                </tr>
-                <tr style="background: #e8f5e9; font-weight: bold;">
-                    <td>TOTAL / MONTH</td>
-                    <td>$30-60</td>
-                    <td>Scale to 500+ daily if needed</td>
-                </tr>
-            </table>
-
-            <h3>Timeline</h3>
-            <div style="background: #f0f0f0; padding: 20px; border-radius: 4px; margin: 15px 0;">
-                <strong>Week 1:</strong> You provide name, email, message, 5-10 test URLs → We build<br>
-                <strong>Week 2:</strong> Test on your URLs → Identify any issues → Fix bugs<br>
-                <strong>Day 11:</strong> Deploy to production → You start running campaigns<br>
-            </div>
         </section>
 
-        <!-- How It's Used -->
+        <!-- FAQ -->
         <section>
-            <h2>Typical Usage Workflow</h2>
-            
-            <h3>Step 1: Setup (One Time)</h3>
-            <ul>
-                <li>Provide your business name, email, and outreach message</li>
-                <li>System is configured and ready</li>
-            </ul>
+            <h2>Frequently Asked Questions</h2>
 
-            <h3>Step 2: Create CSV</h3>
-            <ul>
-                <li>Export company list from Apollo.io, Hunter.io, or your database</li>
-                <li>Format: Company Name | Website URL (two columns)</li>
-                <li>Save as CSV file</li>
-            </ul>
+            <div class="faq-item">
+                <h4>Will websites block this?</h4>
+                <p>Unlikely. We use IP rotation, human-like submission delays, and proper browser headers. Blocking is rare (<1%) with proper configuration. If a site does block, we log it and continue to the next URL.</p>
+            </div>
 
-            <h3>Step 3: Upload & Run</h3>
-            <ul>
-                <li>Upload CSV to the system</li>
-                <li>Click "Start Run"</li>
-                <li>Watch real-time progress</li>
-            </ul>
+            <div class="faq-item">
+                <h4>What if a form uses a CAPTCHA?</h4>
+                <p>Our system automatically solves most CAPTCHAs (90%+ success rate). If a CAPTCHA cannot be solved, we skip that submission and log the attempt. Overall success rate remains 65–75%.</p>
+            </div>
 
-            <h3>Step 4: Review Results</h3>
-            <ul>
-                <li>Check success rate and any issues</li>
-                <li>Export results as CSV/JSON</li>
-                <li>Manually follow up on successful submissions</li>
-            </ul>
+            <div class="faq-item">
+                <h4>Can I customize the message sent?</h4>
+                <p>Yes. Provide any message you want with optional {{COMPANY_NAME}} placeholder. The message is submitted exactly as you write it—no modification or AI generation.</p>
+            </div>
 
-            <h3>Step 5: Repeat</h3>
-            <ul>
-                <li>Rinse and repeat with new URL lists</li>
-                <li>Run as many campaigns as you want</li>
-                <li>Pay only the monthly operational cost</li>
-            </ul>
+            <div class="faq-item">
+                <h4>How do I use the system?</h4>
+                <p>Simple workflow: Create a CSV file with Company Names and URLs → Upload to Apify dashboard → Click "Start Run" → Monitor progress in real-time → Export results as CSV/JSON.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>Can I scale to 10,000+ submissions/month?</h4>
+                <p>Yes. The system is built to scale linearly. At 10,000 submissions, monthly costs increase to ~$70–$100. Just add more target URLs and increase concurrent runs.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>What happens if a website changes its form structure?</h4>
+                <p>Our system adapts. The form detection engine analyzes field types and structure on each run. If a form changes, the system automatically adjusts—no manual updates needed. The adaptive logic handles form variations across websites.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>Do I own the code?</h4>
+                <p>Yes. You receive full source code ownership. The actor is deployed on Apify under your account. You can modify it, extend it, hire another developer to maintain it, or run it independently.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>What about follow-ups and CRM integration?</h4>
+                <p>The core system logs all results (status, success/failure reason, contact info). You handle follow-ups manually via your CRM, email tool, or HubSpot. CRM integrations can be added as a future enhancement if needed.</p>
+            </div>
         </section>
 
         <!-- CTA -->
         <div class="cta-section">
             <h3>Ready to Automate Your Outreach?</h3>
-            <p>Fill out contact forms at scale, automatically. Let's discuss if this is the right fit for your use case.</p>
-            <button onclick="alert('Send us a message: partnerships@boombit.agency')">📧 Get Started</button>
+            <p>Replace manual form submission with reliable, scalable automation built for Boombit's mission to connect talent and drive results globally.</p>
+            <p>5,000 submissions/month • 15–20 days to launch • Complete data control • Owned IP</p>
+            <button class="cta-button" onclick="location.href='mailto:partnerships@boombit.agency?subject=Contact%20Form%20Automation%20Proposal'">Get Started</button>
         </div>
 
-        <!-- FAQ -->
+        <!-- Next Steps -->
         <section>
-            <h2>Frequently Asked Questions</h2>
-            
-            <h3>Q: Will I get blocked by websites?</h3>
-            <p><strong>A:</strong> Unlikely. We use IP rotation, human-like delays, and proper User-Agent rotation. Blocking is rare (<1%) with proper configuration.</p>
-
-            <h3>Q: What if CAPTCHA blocks the form?</h3>
-            <p><strong>A:</strong> We automatically solve most CAPTCHAs (90%+ success). If a CAPTCHA can't be solved, we log it and move on. Still a 75-85% overall success rate.</p>
-
-            <h3>Q: Can I customize the message?</h3>
-            <p><strong>A:</strong> Yes. Use {{COMPANY_NAME}} as a placeholder - it auto-replaces with each company's name. No AI - your message goes exactly as you write it.</p>
-
-            <h3>Q: How many forms can I submit per day?</h3>
-            <p><strong>A:</strong> 100-150 comfortably in one run. With parallel runs, you can scale to 500+ per day.</p>
-
-            <h3>Q: Can I integrate with HubSpot?</h3>
-            <p><strong>A:</strong> Yes, but it's an add-on. Core system logs results to CSV/JSON. HubSpot sync can be built later if needed.</p>
-
-            <h3>Q: What if a website changes its form structure?</h3>
-            <p><strong>A:</strong> We'll update the code for free (first 30 days). After that, it's on a per-incident basis.</p>
-
-            <h3>Q: Do I own the code?</h3>
-            <p><strong>A:</strong> Yes. You get the full actor code and can modify it if needed.</p>
+            <h2>Next Steps to Launch</h2>
+            <ol>
+                <li><strong>Confirm Details</strong> — Review this proposal, pricing, timeline, and volume targets</li>
+                <li><strong>Choose Payment Option</strong> — $1,500 upfront OR $900 + $900 milestone-based</li>
+                <li><strong>Kickoff Call</strong> — Provide target URLs for testing, your outreach message template</li>
+                <li><strong>Build & Test</strong> — 15–20 days of active development and real-world QA</li>
+                <li><strong>Launch</strong> — Deploy to Apify, full documentation handoff, training</li>
+                <li><strong>Monitor & Optimize</strong> — Export results, adjust targeting, scale volume as needed</li>
+            </ol>
         </section>
-
     </div>
 
     <footer>
         <div class="container">
-            <p style="margin-bottom: 10px;">Automated Contact Form Submission System</p>
-            <p style="opacity: 0.7; font-size: 14px;">Boombit — Scaling Talent. Scaling Technology.</p>
+            <p><strong>Boombit Contact Form Automation System</strong></p>
+            <p>Automated outreach at scale. Complete data control. Owned IP.</p>
+            <p><strong>Propelling companies forward since 2012</strong></p>
+            <p style="margin-top: 20px; opacity: 0.8; font-size: 13px;">partnerships@boombit.agency | Nicaragua • Costa Rica • United States</p>
         </div>
     </footer>
-
-    <style>
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
-    </style>
 </body>
 </html>
